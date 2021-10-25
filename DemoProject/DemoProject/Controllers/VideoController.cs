@@ -22,50 +22,50 @@ namespace DemoProject.Controllers
         {
             _videoService = videoService;
         }
-        //[HttpGet("GetVideoByPath")]
-        //public async Task<ActionResult> GetVideoByPath()
-        //{
+        [HttpGet("GetVideoByPath")]
+        public async Task<ActionResult> GetVideoByPath()
+        {
 
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        try
-        //        {
-        //            string host = Environment.GetEnvironmentVariable("VIDEO_STORAGE_HOST");
-        //            string port = Environment.GetEnvironmentVariable("VIDEO_STORAGE_PORT");
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    string host = Environment.GetEnvironmentVariable("VIDEO_STORAGE_HOST");
+                    string port = Environment.GetEnvironmentVariable("VIDEO_STORAGE_PORT");
 
-        //            var res = await httpClient.GetStreamAsync($"http://{host}:{port}/api/video?path=SampleVideo_1280x720_1mb.mp4");
-        //            var response = File(res, "video/mp4");
-        //            return response;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception(ex.Message);
-        //        }
-        //    }
-        //    return Ok();
-        //}
+                    var res = await httpClient.GetStreamAsync($"http://{host}:{port}/api/video?path=SampleVideo_1280x720_1mb.mp4");
+                    var response = File(res, "video/mp4");
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            return Ok();
+        }
 
-        //[HttpGet("GetVideoById")]
-        //public async Task<ActionResult>GetVideoById(int id)
-        //{
-        //    var video = await _videoService.GetPathById(id);
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        try
-        //        {
-        //            string host = Environment.GetEnvironmentVariable("VIDEO_STORAGE_HOST");
-        //            string port = Environment.GetEnvironmentVariable("VIDEO_STORAGE_PORT");
-        //            var res = await httpClient.GetStreamAsync($"http://{host}:{port}/api/video?path={video.PathName}");
-        //            var response = File(res, "video/mp4");
-        //            return response;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception(ex.Message);
-        //        }
-        //    }
-        //    return Ok();
-        //}
+        [HttpGet("GetVideoById")]
+        public async Task<ActionResult> GetVideoById(int id)
+        {
+            var video = await _videoService.GetPathById(id);
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    string host = Environment.GetEnvironmentVariable("VIDEO_STORAGE_HOST");
+                    string port = Environment.GetEnvironmentVariable("VIDEO_STORAGE_PORT");
+                    var res = await httpClient.GetStreamAsync($"http://{host}:{port}/api/video?path={video.PathName}");
+                    var response = File(res, "video/mp4");
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            return Ok();
+        }
         [HttpGet("GetAll")]
         public ActionResult<List<Videos>>GetAll()
         {
